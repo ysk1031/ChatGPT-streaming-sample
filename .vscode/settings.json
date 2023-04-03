@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["dotenv", "fastapi", "langchain", "OPENAI"],
+  "cSpell.words": ["dotenv", "fastapi", "langchain", "OPENAI", "uvicorn"],
   "python.analysis.extraPaths": [
     "server/python/.venv/lib/python3.11/site-packages/"
   ],

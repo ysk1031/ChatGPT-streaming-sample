@@ -7,4 +7,4 @@ class ChatStreamHandler(StreamingStdOutCallbackHandler):
         self.gen = gen
 
     def on_llm_new_token(self, token: str, **kwargs) -> None:
-        self.gen.put(token)
+        self.gen.send(token)
