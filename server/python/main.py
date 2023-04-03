@@ -3,9 +3,11 @@ import os
 import openai
 from dotenv import load_dotenv
 from langchain.callbacks.base import CallbackManager
-from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
+
+from server.python.chat_stream_handler import ChatStreamHandler
+from server.python.threaded_generator import ThreadedGenerator
 
 load_dotenv()
 
@@ -17,7 +19,7 @@ def streaming_sample():
         temperature=0.2,
         streaming=True,
         callback_manager=CallbackManager(
-            handlers=[StreamingStdOutCallbackHandler()]
+            handlers=[ChatStreamHandler(gen=ThreadedGenerator())]
         ),
         verbose=True,
     )
