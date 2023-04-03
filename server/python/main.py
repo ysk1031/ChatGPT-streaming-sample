@@ -40,7 +40,7 @@ def chat_worker(gen: ThreadedGenerator):
             temperature=0.2,
             streaming=True,
             callback_manager=CallbackManager(
-                handlers=[StreamingStdOutCallbackHandler()]
+                handlers=[ChatStreamHandler(gen=gen)]
             ),
             verbose=True,
         )
