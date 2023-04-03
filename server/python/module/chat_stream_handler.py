@@ -1,10 +1,11 @@
-from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+import os
+import sys
 
-from server.python.threaded_generator import ThreadedGenerator
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
 
 class ChatStreamHandler(StreamingStdOutCallbackHandler):
-    def __init__(self, gen: ThreadedGenerator) -> None:
+    def __init__(self, gen) -> None:
         super().__init__()
         self.gen = gen
 
