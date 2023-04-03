@@ -1,7 +1,7 @@
 {
-  "cSpell.words": ["dotenv", "OPENAI"],
+  "cSpell.words": ["dotenv", "langchain", "OPENAI"],
   "python.analysis.extraPaths": [
     "server/python/.venv/lib/python3.11/site-packages/"
   ],
-  "python.formatting.blackPath": "server/python/.venv/lib/python3.11/site-packages/black"
+  "python.formatting.blackPath": "server/python/.venv/bin/black"
 }
