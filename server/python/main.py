@@ -5,6 +5,7 @@ import openai
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from langchain.callbacks.base import CallbackManager
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
@@ -21,6 +22,12 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",  # Next.jsからのアクセス用
+]
+
+app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 
 def stdout_streaming_sample() -> None:
@@ -69,7 +76,7 @@ def stream_chat(prompt: str) -> ThreadedGenerator:
     return gen
 
 
-@app.get("/streaming_chat")
+@app.post("/streaming_chat")
 async def streaming():
     return StreamingResponse(
         stream_chat(prompt="AI時代を危惧したラップを披露してください。"),
