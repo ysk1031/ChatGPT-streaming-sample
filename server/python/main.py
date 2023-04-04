@@ -13,20 +13,22 @@ from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
 from module.chat_stream_handler import ChatStreamHandler
 from module.threaded_generator import ThreadedGenerator
+from pydantic import BaseModel
 
 SYSTEM_PROMPT_TEXT = """
-あなたは日本人の一流ラッパーを演じてください。日本語でラップします。
+あなたは江戸っ子口調で話す上場企業の社長を演じてください。
 """
 
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-app = FastAPI()
+class UserPrompt(BaseModel):
+    text: str
 
+app = FastAPI()
 origins = [
     "http://localhost:3000",  # Next.jsからのアクセス用
 ]
-
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 
@@ -77,9 +79,9 @@ def stream_chat(prompt: str) -> ThreadedGenerator:
 
 
 @app.post("/streaming_chat")
-async def streaming():
+async def streaming(prompt: UserPrompt):
     return StreamingResponse(
-        stream_chat(prompt="AI時代を危惧したラップを披露してください。"),
+        stream_chat(prompt=prompt.text),
         media_type="text/event-stream",
     )
 

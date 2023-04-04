@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-export const useChat: () => {
+export const useStreamChat: (userPrompt: string) => {
   text: string;
   error: any | null;
-} = () => {
+} = (userPrompt) => {
   const [text, setText] = useState<string>('');
   const [error, setError] = useState<any | null>(null);
 
@@ -14,7 +14,9 @@ export const useChat: () => {
       cache: 'no-cache',
       headers: {
         Accept: 'text/event-stream',
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ text: userPrompt }),
     })
       .then((response) => {
         const body = response.body;
@@ -57,7 +59,7 @@ export const useChat: () => {
         console.log(err);
         setError(err);
       });
-  }, []);
+  }, [userPrompt]);
 
   return { text, error };
 };
