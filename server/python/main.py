@@ -81,7 +81,7 @@ def stream_chat(prompt: str) -> ThreadedGenerator:
 @app.post("/streaming_chat")
 async def streaming(prompt: UserPrompt):
     return StreamingResponse(
-        stream_chat(prompt=prompt.text),
+        content=stream_chat(prompt=prompt.text),
         media_type="text/event-stream",
     )
 
