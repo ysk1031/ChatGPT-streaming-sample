@@ -1,7 +1,16 @@
 {
   "cSpell.words": ["dotenv", "fastapi", "langchain", "OPENAI", "uvicorn"],
-  "python.analysis.extraPaths": [
-    "server/python/.venv/lib/python3.11/site-packages/"
-  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.format.enable": true,
+  "eslint.nodePath": "front/node_modules",
+  "eslint.packageManager": "yarn",
+  "prettier.configPath": "front/.prettierrc",
+  "prettier.ignorePath": "front/.prettierignore",
+  "prettier.prettierPath": "front/node_modules/prettier",
+  "prettier.requireConfig": true,
+  "python.analysis.extraPaths": ["server/python/.venv/lib/python3.11/site-packages/"],
   "python.formatting.blackPath": "server/python/.venv/bin/black"
 }
